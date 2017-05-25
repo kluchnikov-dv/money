@@ -2,9 +2,9 @@ package money.incexp;
 
 //абстрактный класс "Статья"
 public abstract class Item {
-	String date; 				//дата
-	double amount;				//сумма	
-	String comment;				//коментарий		
+	private String date; 				//дата
+	private double amount;				//сумма	
+	private String comment;				//коментарий		
 	
 	//создать статью
 	Item(String date, double amount, String comment) {
@@ -12,4 +12,23 @@ public abstract class Item {
 		this.amount = amount;		
 		this.comment = comment;		
 	}	
+	
+	public void setItem (String date, double amount, String comment) {
+		this.date = date;
+		this.amount = amount;		
+		this.comment = comment;
+	}
+	
+	//получить значения полей
+	public String getDate() {
+		return date;		
+	}
+	
+	public double getAmount() {
+		return amount;
+	}	
+	
+	public String getComment() {
+		return comment;
+	}
 }
