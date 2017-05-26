@@ -9,63 +9,91 @@ import javafx.event.*;			//обработчик события
 import javafx.geometry.*;		//
 import javafx.beans.value.*;
 
+
 public class money extends Application 
 {	
-	//создаем кнопки
-	ToggleButton incomeToggleButton = new ToggleButton("  Доходы  ");	
-	ToggleButton expenseToggleButton = new ToggleButton(" Расходы  ");
-	Button exitButton = new Button("  Выход   ");
-	
+	private Stage primaryStage;
+	private BorderPane rootNode;
+	private String selected; 
+		
 	//этот метод можно пропустить
     public static void main( String[] args )
     {
         //запустить JavaFX-приложение
         launch(args);
-    }
-   
-    //переопределить метод start()
-    public void start(final Stage primaryStage) {    
-    	primaryStage.setTitle("money");	    						//задаем заголовок подмостка    	    	
-    	FlowPane rootNode = new FlowPane(10, 10);					//создаем корневой узел - панель поточной компановки    	
-    	rootNode.setAlignment(Pos.TOP_CENTER);						//Выровнять все элементы по центру слева
-    	primaryStage.setScene(new Scene(rootNode, 1500, 1000));		//Создаем сцену и устанавливаем сцену на подмосток
+    }    
+    
+    //создание меню
+    private void initMenu() {
+    	MenuBar menuBar = new MenuBar();														//создать строку меню-бар   	
+    	Menu menuFile = new Menu("Файл");														//создать меню "Файл"
+    	MenuItem menuItemOpenDB = new MenuItem("Открыть БД");									//создать подменю
+    	MenuItem menuItemExit = new MenuItem("Выход");									
+    	menuFile.getItems().addAll(menuItemOpenDB, new SeparatorMenuItem(), menuItemExit);		//добавить подменю в меню
     	
+    	Menu menuHelp = new Menu("Справка");
+    	MenuItem menuItemHelp = new MenuItem("Справка money");
+    	MenuItem menuItemAbout = new MenuItem("О программе");
+    	menuHelp.getItems().addAll(menuItemHelp, new SeparatorMenuItem(), menuItemAbout);
+    	menuBar.getMenus().addAll(menuFile, menuHelp);											//добавить меню в меню-бар
     	
-    	TreeItem<String> itemRoot = new TreeItem<String>("деньги");
-    	TreeItem<String> itemIncome = new TreeItem<String>("доходы");
-    	TreeItem<String> itemExpense = new TreeItem<String>("расходы");
-    	TreeView<String> tvRoot = new TreeView<String>(itemRoot);
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	    	
-    	incomeToggleButton.setOnAction(new EventHandler<ActionEvent>() {								//обработчик события кнопки "Доходы"
-    		public void handle(ActionEvent ae) {														//зарегестрировать обработчик события для конкретной кнопки, при помощи setOnAction    			
-    			 if (incomeToggleButton.isSelected()) expenseToggleButton.setSelected(false);			//создать анонимный внутренний класс на основе интерфейса EventHandler	 	    	
-    		}																							//реализовать единственный метод handle для обработки события
-    	});
-    	
-
-    	expenseToggleButton.setOnAction(new EventHandler<ActionEvent>() {								//обработчик события кнопки "Расходы"
-    		public void handle(ActionEvent ae) {
-    			 if (expenseToggleButton.isSelected()) incomeToggleButton.setSelected(false); 			    	    	
-    		}
-    	});
-    	    	
-    	exitButton.setOnAction(new EventHandler<ActionEvent>() {										//обработчик события кнопки "Выход"
+    	//обработчик события меню  "Выход"
+    	menuItemExit.setOnAction(new EventHandler<ActionEvent>(){
     		public void handle(ActionEvent ae) {
     			primaryStage.close();
     		}
-    	});
+    	});  
     	
-    	rootNode.getChildren().addAll(incomeToggleButton, expenseToggleButton, exitButton);				//ввести элементы (кнопки) в (корневой узел - граф) сцены    	
-    	primaryStage.show();																			//Показываем подмосток и сцену
+    	rootNode.setTop(menuBar);
+    }
+    
+    //создание дерева пунктов
+    public void initTree() {
+    	TreeItem<String> treeItemRoot = new TreeItem<String>("деньги");							//создать корневой узел
+    	TreeItem<String> treeItemIncome = new TreeItem<String>("доходы");						//создать дочерний узел
+    	TreeItem<String> treeItemExpense = new TreeItem<String>("расходы");		
+    	treeItemRoot.getChildren().addAll(treeItemIncome, treeItemExpense);						//ввести дочерний узел в корневой    	
+    	TreeView<String> treeViewRoot = new TreeView<String>(treeItemRoot);						//создать древовидное представление используя построенное дерево
+    	treeItemRoot.setExpanded(true);
+    	
+    	//обработчик дерева пунктов
+    	MultipleSelectionModel <TreeItem<String>> treeViewMultipleSelectionModel = treeViewRoot.getSelectionModel();	//получить модель выбора для древовидного представления
+    	    	    	
+    	treeViewMultipleSelectionModel.selectedItemProperty().addListener(												//Использовать приёмник событий изменения, чтобы оперативно 
+    			new ChangeListener<TreeItem<String>>() {																//реагировать на выбор элементов в древовидном представлении
+    				public void changed(ObservableValue<? extends TreeItem<String>> changed, TreeItem<String> oldVal, TreeItem<String> newVal){
+    					if (newVal != null) selected = newVal.getValue();
+    				}
+    			}
+    	);
+    	rootNode.setLeft(treeViewRoot);
+    }
+    
+    //данные dataGrid
+    public void initDataGrid() {
+    	TableView tableViewData = new TableView();
+    	tableViewData.setEditable(true);
+    	TableColumn data = new TableColumn("Дата");
+    	TableColumn amount = new TableColumn("Сумма");
+    	TableColumn comment = new TableColumn("Комментарий");
+    	tableViewData.getColumns().addAll(data, amount, comment);
+    	
+    	VBox vbox = new VBox();    	
+    	vbox.setPadding(new Insets(10, 10, 10, 10));
+    	vbox.getChildren().add(tableViewData);  	
+    	rootNode.setRight(vbox);
+    }
+    
+    //переопределить метод start()
+    public void start(Stage getStage) {
+    	primaryStage = getStage;
+    	primaryStage.setTitle("money");	    											//задаем заголовок подмостка    	    	
+    	rootNode = new BorderPane();													//создаем корневой узел - панель граничной компановки    	
+    	primaryStage.setScene(new Scene(rootNode, 1280, 1024));							//Создаем сцену и устанавливаем сцену на подмосток    	
+    	initMenu();
+    	initTree();
+    	initDataGrid();
+    	primaryStage.show();															//Показываем подмосток и сцену
     }   
     
 }
