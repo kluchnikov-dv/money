@@ -2,8 +2,15 @@ package money.incexp;
 
 //"статья расходов"
 public class ExpenseItem extends Item{
-	private String typeOfExpense;		//тип расхода
-	private String whereBuy;			//где купил
+	private String typeOfExpense;																		//тип расхода
+	private String whereBuy;																			//где купил	
+	private static String fields[] = {"ДАТА", "СУММА", "КОММЕНТАРИЙ", "ВИД РАСХОДА", "МЕСТО ПОКУПКИ"};		//поля
+	
+	ExpenseItem() {
+		super();
+		typeOfExpense = null;
+		whereBuy = null;
+	}
 	
 	//создать "статью расходов"
 	ExpenseItem(String date, double amount, String comment, String typeOfExpense, String whereBuy) {
@@ -25,5 +32,9 @@ public class ExpenseItem extends Item{
 	
 	public String getWhere() {
 		return whereBuy;
+	}
+	
+	public static String[] getFields() {
+		return fields;
 	}
 }

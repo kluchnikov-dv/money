@@ -12,27 +12,48 @@ import javafx.beans.value.*;
 
 public class money extends Application 
 {		
+	private static Stage primaryStage;															//подмостк
+	private static BorderPane rootNode;															//корневой узел - панель граничной компановки
+	private static MoneyTableView moneyTableView;												//таблицу
+	private MoneyMenu moneyMenu;																//меню
+	private MoneyTree moneyTree;																//дерево
 	
-	//этот метод можно пропустить
+		
     public static void main( String[] args )
-    {
-        //запустить JavaFX-приложение
-        launch(args);
+    {    
+        launch(args);																			//запустить JavaFX-приложение
     }    
     
     //переопределить метод start()
     public void start(Stage getStage) {
-    	Stage primaryStage = getStage;
-    	primaryStage.setTitle("money");	    													//задаем заголовок подмостка    	    	
-    	BorderPane rootNode = new BorderPane();													//создаем корневой узел - панель граничной компановки    	
+    	
+    	rootNode = new BorderPane();
+    	
+    	primaryStage = getStage;
+    	primaryStage.setTitle("money");	    													    	    	    	    	
     	primaryStage.setScene(new Scene(rootNode, 1280, 1024));									//Создаем сцену и устанавливаем сцену на подмосток
     	
-    	rootNode.setTop(new MoneyMenu(primaryStage).getMenuBar());								//создать меню    и разместить в корневом узле сверху    	
-    	rootNode.setLeft(new MoneyTree("деньги", "доходы", "расходы").getTreeView());			//создать дерево  и разместить в корневом узле слева
-    	
-    	rootNode.setCenter(new MoneyTableView("дата", "сумма", "коментарий").getTableView());	//создать таблицу и разместить в корневом узле по центру
+    	moneyMenu = new MoneyMenu();												
+    	rootNode.setTop(moneyMenu.getMenuBar());											    //разместить меню в корневом узле сверху
+    	    	
+    	moneyTree = new MoneyTree("ДЕНЬГИ", "ДОХОДЫ", "РАСХОДЫ");								
+    	rootNode.setLeft(moneyTree.getTreeView());												//разместить дерево в корневом узле слева
+    	moneyTree.expandTreeItems();															//раскрыть все узлы
+
+    	moneyTableView = new MoneyTableView();													
     	
     	primaryStage.show();																	//Показываем подмосток с размещеной на нем сценой
     }   
     
+    public static Stage getPrimaryStage() {
+    	return primaryStage;
+    }
+    
+    public static BorderPane getRootNode() {
+    	return rootNode;
+    }         
+    
+    public static MoneyTableView getMoneyTableView() {
+    	return moneyTableView;
+    }
 }

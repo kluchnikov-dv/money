@@ -10,8 +10,7 @@ import javafx.event.*;			//обработчик события
 public class MoneyMenu {
 	private MenuBar menuBar = new MenuBar();														//создать строку меню-бар
 	
-	MoneyMenu(final Stage primaryStage) {
-		
+	MoneyMenu() {		
 		Menu menuFile = new Menu("Файл");														//создать меню "Файл"
 		MenuItem menuItemOpenDB = new MenuItem("Открыть БД");									//создать подменю
 		MenuItem menuItemExit = new MenuItem("Выход");									
@@ -27,7 +26,7 @@ public class MoneyMenu {
 		//обработчик события меню  "Выход"
 		menuItemExit.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent ae) {
-				primaryStage.close();
+				money.getPrimaryStage().close();
 			}
 		});  
 	}

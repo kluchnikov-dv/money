@@ -3,22 +3,31 @@ package money.incexp;
 import javafx.scene.layout.*;	//корневой узел
 import javafx.scene.control.*;	//кнопки
 
-public class MoneyTableView {
+public class MoneyTableView {	
+	private IncomeItem incomeItem;
+	private ExpenseItem expenseItem;
 	
-	private TableView tableView = new TableView();								//создать таблицу
-	//private TableColumn tableColumns[];										//колонки
+	private TableView tableViewIncome = new TableView();											//создать таблицу для доходов
+	private TableView tableViewExpense = new TableView();											//создать таблицу для расходов
 	
-	MoneyTableView(String ...tableColumns) {									//создать колонки, перечислив их названия в качестве строковых параметров 
-		//this.tableColumns = new TableColumn[tableColumns.length];							
+	MoneyTableView() {
+		//создать колонки
+		for (int i = 0; i < incomeItem.getFields().length; i++) {
+			tableViewIncome.getColumns().add(new TableColumn(incomeItem.getFields()[i]));								
+		}
 		
-		for(int i = 0; i < tableColumns.length; i++) {
-			//this.tableColumns[i] = new TableColumn(tableColumns[i]);
-			 tableView.getColumns().add(new TableColumn(tableColumns[i]));		//добавить колонки в таблицу this.tableColumns[i]
-		}		
-	}
+		for (int i = 0; i < expenseItem.getFields().length; i++) {
+			tableViewExpense.getColumns().add(new TableColumn(expenseItem.getFields()[i]));	
+		}
+		
+	}	
 	
-	TableView getTableView() {
-		return tableView;
+	TableView getTableViewByName(String nameTableView) {
+		if (nameTableView == "tableViewIncome") 
+			return tableViewIncome;
+		if (nameTableView == "tableViewExpense") 
+			return tableViewExpense;
+		return null;
 	}
 	
 }
