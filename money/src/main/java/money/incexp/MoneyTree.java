@@ -31,13 +31,19 @@ public class MoneyTree {
     				//вызвать метод для показа нужной таблицы
     				if (newVal != null) {
     					if(newVal.getValue() == "ДОХОДЫ") {
-    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewIncome")); 
-    		    		
+    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewExpense"));    						
+    				    	
     					}
     					if(newVal.getValue() == "РАСХОДЫ") { 
-    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewExpense"));    	 	
+    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewExpense"));
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
     					}
-    				}
+    					if(newVal.getValue() == "ДЕНЬГИ") {
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewExpense"));    		    		
+    					}
+    				}    				
     			}
     		});    	
     }

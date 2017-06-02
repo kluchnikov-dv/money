@@ -1,10 +1,15 @@
 package money.incexp;
 
+interface IExpenseItemFields {
+	final  static String fields[] = {"ДАТА", "СУММА", "КОММЕНТАРИЙ", "ВИД РАСХОДА", "МЕСТО ПОКУПКИ"};	//поля
+	final  static int minWidth[] = {100, 100, 400, 200, 200};											//минимальная ширина поля
+	
+}
+
 //"статья расходов"
-public class ExpenseItem extends Item{
+public class ExpenseItem extends Item implements IExpenseItemFields{
 	private String typeOfExpense;																		//тип расхода
 	private String whereBuy;																			//где купил	
-	private static String fields[] = {"ДАТА", "СУММА", "КОММЕНТАРИЙ", "ВИД РАСХОДА", "МЕСТО ПОКУПКИ"};		//поля
 	
 	ExpenseItem() {
 		super();
@@ -33,8 +38,5 @@ public class ExpenseItem extends Item{
 	public String getWhere() {
 		return whereBuy;
 	}
-	
-	public static String[] getFields() {
-		return fields;
-	}
+		
 }

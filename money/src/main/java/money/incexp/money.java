@@ -35,13 +35,14 @@ public class money extends Application
     	
     	moneyMenu = new MoneyMenu();												
     	rootNode.setTop(moneyMenu.getMenuBar());											    //разместить меню в корневом узле сверху
-    	    	
+    	
+    	
     	moneyTree = new MoneyTree("ДЕНЬГИ", "ДОХОДЫ", "РАСХОДЫ");								
     	rootNode.setLeft(moneyTree.getTreeView());												//разместить дерево в корневом узле слева
     	moneyTree.expandTreeItems();															//раскрыть все узлы
 
-    	moneyTableView = new MoneyTableView();													
-    	
+    	moneyTableView = new MoneyTableView();		
+
     	primaryStage.show();																	//Показываем подмосток с размещеной на нем сценой
     }   
     
