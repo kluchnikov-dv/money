@@ -14,9 +14,9 @@ public class money extends Application
 {		
 	private static Stage primaryStage;															//подмостк
 	private static BorderPane rootNode;															//корневой узел - панель граничной компановки
-	private static MoneyTableView moneyTableView;												//таблицу
+	private static MoneyTableView moneyTableView;												//таблица
 	private MoneyMenu moneyMenu;																//меню
-	private MoneyTree moneyTree;																//дерево
+	private MoneyTree moneyTree;																//дерево	
 	
 		
     public static void main( String[] args )

@@ -18,7 +18,7 @@ public abstract class Item {
 		this.date = date;
 		this.amount = amount;		
 		this.comment = comment;		
-	}	
+	}
 	
 	public void setItem (String date, double amount, String comment) {
 		this.date = date;

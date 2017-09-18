@@ -6,7 +6,7 @@ import javafx.event.*;			//обработчик события
 import javafx.beans.value.*;
 
 public class MoneyTree {
-	private String selectedItemMoneyTree;								//имя выбранного узла дерева
+	//private String selectedItemMoneyTree;								//имя выбранного узла дерева
 	private TreeView<String> treeView ;									//дерево
 	private TreeItem<String> treeItems;									//узлы дерева
 	
@@ -26,22 +26,22 @@ public class MoneyTree {
     	MultipleSelectionModel <TreeItem<String>> treeViewMultipleSelectionModel = treeView.getSelectionModel();		//получить модель выбора для древовидного представления
     	    	    	
     	treeViewMultipleSelectionModel.selectedItemProperty().addListener(												//Использовать приёмник событий изменения, чтобы оперативно 
-    		new ChangeListener<TreeItem<String>>() {																//реагировать на выбор элементов в древовидном представлении
+    		new ChangeListener<TreeItem<String>>() {																	//реагировать на выбор элементов в древовидном представлении
     			public void changed(ObservableValue<? extends TreeItem<String>> changed, TreeItem<String> oldVal, TreeItem<String> newVal){
     				//вызвать метод для показа нужной таблицы
     				if (newVal != null) {
     					if(newVal.getValue() == "ДОХОДЫ") {
-    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
-    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewExpense"));    						
+    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewIncome());
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewExpense());    						
     				    	
     					}
     					if(newVal.getValue() == "РАСХОДЫ") { 
-    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewByName("tableViewExpense"));
-    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
+    						money.getRootNode().setCenter(money.getMoneyTableView().getTableViewExpense());
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewIncome());
     					}
     					if(newVal.getValue() == "ДЕНЬГИ") {
-    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewIncome"));
-    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewByName("tableViewExpense"));    		    		
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewIncome());
+    						money.getRootNode().getChildren().remove(money.getMoneyTableView().getTableViewExpense());    		    		
     					}
     				}    				
     			}
@@ -52,10 +52,10 @@ public class MoneyTree {
 	public void expandTreeItems() {
 		this.treeItems.setExpanded(true);
 	}
-	
+	/*
 	public String getSelected() {
 		return selectedItemMoneyTree;
-	}
+	}*/
 	
 	public TreeView<String> getTreeView() {
 		return treeView;

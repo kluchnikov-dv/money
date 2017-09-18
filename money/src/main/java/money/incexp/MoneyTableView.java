@@ -27,12 +27,12 @@ public class MoneyTableView {
 		
 	}	
 	
-	TableView getTableViewByName(String nameTableView) {
-		if (nameTableView == "tableViewIncome") 
-			return tableViewIncome;
-		if (nameTableView == "tableViewExpense") 
-			return tableViewExpense;
-		return null;
+	TableView getTableViewIncome() {		 
+			return tableViewIncome;		
+	}
+	
+	TableView getTableViewExpense() {
+		return tableViewExpense;
 	}
 	
 }
