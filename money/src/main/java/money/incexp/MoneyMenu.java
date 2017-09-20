@@ -9,7 +9,7 @@ import javafx.event.*;			//обработчик события
 
 public class MoneyMenu {
 	private MenuBar menuBar = new MenuBar();														//создать строку меню-бар
-	private WorkDB workDB;																			//работа с БД
+	//private WorkDB workDB;																			//работа с БД
 	
 	MoneyMenu() {		
 		Menu menuFile = new Menu("Файл");														//создать меню "Файл"
@@ -37,7 +37,7 @@ public class MoneyMenu {
 		menuItemConnectDB.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent ae) {
 				//соединяем БД PostgreSQL			
-				workDB = new WorkDB();				
+				//workDB = new WorkDB();				
 			}
 		});
 	}

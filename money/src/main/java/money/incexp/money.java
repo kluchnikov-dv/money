@@ -8,6 +8,8 @@ import javafx.scene.control.*;	//кнопки
 import javafx.event.*;			//обработчик события 
 import javafx.geometry.*;		//
 import javafx.beans.value.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class money extends Application 
@@ -17,7 +19,6 @@ public class money extends Application
 	private static MoneyTableView moneyTableView;												//таблица
 	private MoneyMenu moneyMenu;																//меню
 	private MoneyTree moneyTree;																//дерево	
-	
 		
     public static void main( String[] args )
     {    
@@ -40,11 +41,11 @@ public class money extends Application
     	moneyTree = new MoneyTree("ДЕНЬГИ", "ДОХОДЫ", "РАСХОДЫ");								
     	rootNode.setLeft(moneyTree.getTreeView());												//разместить дерево в корневом узле слева
     	moneyTree.expandTreeItems();															//раскрыть все узлы
-
-    	moneyTableView = new MoneyTableView();		
+    	    	
+    	moneyTableView = new MoneyTableView();													//создать таблицы 
 
     	primaryStage.show();																	//Показываем подмосток с размещеной на нем сценой
-    }   
+    }       
     
     public static Stage getPrimaryStage() {
     	return primaryStage;

@@ -1,13 +1,11 @@
 package money.incexp;
-
-interface IIncomeItemFields {
-	static final String fields[] = {"ДАТА", "СУММА", "КОММЕНТАРИЙ", "ВИД ДОХОДА"};	//поля
-	static final int  minWidth[] = {100, 100, 400, 200};							//минимальная ширина поля
-}
-
 //"статья доходов"
-public class IncomeItem extends Item implements IIncomeItemFields {
-	private String typeOfIncome;														//тип дохода		
+public class IncomeItem extends Item {
+	public String[] fieldsName = new String[] {"ДАТА", "СУММА", "КОМЕНТАРИЙ", "ВИД ДОХОДА"};		
+	public String[] fields = new String[] {"date", "amount", "comment", "typeOfIncome"};
+	public int[] minWidth = new int[] {100, 100, 400, 200};
+	
+	private String typeOfIncome;														//тип дохода				
 	
 	IncomeItem() {
 		super();
@@ -15,13 +13,13 @@ public class IncomeItem extends Item implements IIncomeItemFields {
 	}
 	
 	//создать "статью доходов"
-	IncomeItem(String date, double amount, String comment, String typeOfIncome) {
+	IncomeItem(String date, String amount, String comment, String typeOfIncome) {
 		super(date, amount, comment);
 		this.typeOfIncome = typeOfIncome;
 	}
 	
 	//изменить данные "статьи доходов"
-	public void setIncomeItem(String date, double amount, String comment, String typeOfIncome) {
+	public void setIncomeItem(String date, String amount, String comment, String typeOfIncome) {
 		setItem(date, amount, comment);
 		this.typeOfIncome = typeOfIncome;
 	}

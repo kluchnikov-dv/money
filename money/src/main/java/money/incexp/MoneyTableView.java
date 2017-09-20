@@ -2,28 +2,43 @@ package money.incexp;
 
 import javafx.scene.layout.*;	//корневой узел
 import javafx.scene.control.*;	//кнопки
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MoneyTableView {	
-	private IncomeItem incomeItem;
-	private ExpenseItem expenseItem;
+	private IncomeItem incomeItem = new IncomeItem();
+	private ExpenseItem expenseItem = new ExpenseItem();
 	
-	private TableView tableViewIncome = new TableView();							//создать таблицу для доходов
-	private TableView tableViewExpense = new TableView();							//создать таблицу для расходов
+	private TableView<IncomeItem> tableViewIncome = new TableView();							//создать таблицу для доходов
+	private TableView<ExpenseItem> tableViewExpense = new TableView();							//создать таблицу для расходов
 	
 	MoneyTableView() {
-		TableColumn temp;
-		//создать колонки
-		for (int i = 0; i < incomeItem.fields.length; i++) {			
-			temp = new TableColumn(incomeItem.fields[i]);							//создать колонку с именем из incomeItem.Fields[i]			
-			temp.setMinWidth(incomeItem.minWidth[i]);								//присвоить минимальную ширину колонке							
-			tableViewIncome.getColumns().add(temp);									//добавить колонку в таблицу
+							
+		for(int i = 0; i < incomeItem.fields.length; i++) {
+			//создать одну из колонок таблицы доходов
+			TableColumn<IncomeItem, String> temp = new TableColumn(incomeItem.fieldsName[i]);
+			//задать минимальную ширину колонки
+			temp.setMinWidth(incomeItem.minWidth[i]);
+			//свзяать колонку с полем класса incomeItem
+			temp.setCellValueFactory(new PropertyValueFactory(incomeItem.fields[i]));
+			//добавить колонку в таблицу
+			tableViewIncome.getColumns().add(temp);
 		}
+		//загрузить данные в таблицу доходов
+		tableViewIncome.setItems(incomeItem.getIncomeItemList());
 		
-		for (int i = 0; i < expenseItem.fields.length; i++) {
-			temp = new TableColumn(expenseItem.fields[i]);
+		
+		for(int i = 0; i < expenseItem.fields.length; i++) {
+			//создать одну из колонок таблицы расходов
+			TableColumn<ExpenseItem, String> temp = new TableColumn(expenseItem.fieldsName[i]);
+			//задать минимальную ширину колонки
 			temp.setMinWidth(expenseItem.minWidth[i]);
-			tableViewExpense.getColumns().add(temp);	
+			//свзяать колонку с полем класса expenseItem
+			temp.setCellValueFactory(new PropertyValueFactory(expenseItem.fields[i]));
+			//добавить колонку в таблицу
+			tableViewExpense.getColumns().add(temp);
 		}
+		//загрузить данные в таблицу доходов
+		tableViewExpense.setItems(expenseItem.getExpenseItemList());		
 		
 	}	
 	
