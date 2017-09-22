@@ -3,7 +3,7 @@ package money.incexp;
 public class IncomeItem extends Item {
 	public String[] fieldsName = new String[] {"ДАТА", "СУММА", "КОМЕНТАРИЙ", "ВИД ДОХОДА"};		
 	public String[] fields = new String[] {"date", "amount", "comment", "typeOfIncome"};
-	public int[] minWidth = new int[] {100, 100, 400, 200};
+	public int[] minWidth = new int[] {150, 100, 400, 200};
 	
 	private String typeOfIncome;														//тип дохода				
 	

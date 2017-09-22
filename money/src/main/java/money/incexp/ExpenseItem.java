@@ -4,8 +4,7 @@ package money.incexp;
 public class ExpenseItem extends Item {
 	public String[] fieldsName = new String[] {"ДАТА", "СУММА", "КОМЕНТАРИЙ", "ВИД РАСХОДА", "ГДЕ КУПИЛ"};		
 	public String[] fields = new String[] {"date", "amount", "comment", "typeOfExpense", "whereBuy"};
-	public int[] minWidth = new int[] {100, 100, 400, 200};
-	
+	public int[] minWidth = new int[] {150, 100, 400, 200, 200};	
 	private String typeOfExpense;																		//тип расхода
 	private String whereBuy;																			//где купил	
 	

@@ -16,7 +16,7 @@ public class WorkDB {
 	private String url = "jdbc:postgresql://localhost:5432/money";
 	private String login = "pgmoney";
 	private String password = "pgmoney";
-	private Connection connection;
+	private Connection connection;	
 	
 	//подключиться к БД
 	public void ConnectToDB() {
@@ -77,7 +77,7 @@ public class WorkDB {
 		} 		
 	}
 	
-	
+	/*
 	public ObservableList<ExpenseItem> getExpenseItem() {
 		try {			
 			Statement stmt = connection.createStatement();
@@ -94,5 +94,6 @@ public class WorkDB {
 			return null;
 		} 		
 	}
+	*/
 			
 }
